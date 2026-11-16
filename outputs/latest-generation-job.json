@@ -1,0 +1,28 @@
+{
+  "project": "PolyGen",
+  "createdAt": "2026-11-16T03:52:25.294Z",
+  "specification": {
+    "project": "PolyGen",
+    "sourcePrompt": "A red wooden chair",
+    "asset": {
+      "object": "chair",
+      "geometry": "unspecified",
+      "appearance": {
+        "color": "red",
+        "material": "wooden",
+        "style": "unspecified"
+      },
+      "size": "unspecified"
+    },
+    "outputFormat": "glb",
+    "status": "SPECIFICATION_READY"
+  },
+  "generationResult": {
+    "provider": "mock",
+    "taskId": "POLYGEN-DEMO-001",
+    "status": "QUEUED",
+    "message": "Mock generation request accepted.",
+    "outputFormat": "glb"
+  },
+  "pipelineStatus": "COMPLETED"
+}
