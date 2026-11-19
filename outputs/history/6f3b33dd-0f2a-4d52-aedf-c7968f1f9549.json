@@ -1,0 +1,30 @@
+{
+  "project": "PolyGen",
+  "createdAt": "2026-11-19T16:43:47.103Z",
+  "specification": {
+    "project": "PolyGen",
+    "sourcePrompt": "Create a red metallic sports car",
+    "asset": {
+      "object": "create sports car",
+      "geometry": "unspecified",
+      "appearance": {
+        "color": "red",
+        "material": "metallic",
+        "style": "unspecified"
+      },
+      "size": "unspecified"
+    },
+    "outputFormat": "glb",
+    "status": "SPECIFICATION_READY"
+  },
+  "generationResult": {
+    "provider": "mock",
+    "taskId": "POLYGEN-DEMO-001",
+    "status": "QUEUED",
+    "message": "Mock generation request accepted.",
+    "outputFormat": "glb"
+  },
+  "status": "QUEUED",
+  "pipelineStatus": "COMPLETED",
+  "jobId": "6f3b33dd-0f2a-4d52-aedf-c7968f1f9549"
+}

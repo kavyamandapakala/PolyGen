@@ -8,6 +8,8 @@ const {
   generateAsset
 } = require("./generation-provider");
 
+const { saveJob } = require("./job-history");
+
 async function runPipeline(prompt, outputDirectory = "outputs") {
   const specification = parsePrompt(prompt);
   const provider = new MockGenerationProvider();
@@ -22,10 +24,13 @@ async function runPipeline(prompt, outputDirectory = "outputs") {
     createdAt: new Date().toISOString(),
     specification,
     generationResult,
+    status: generationResult.status,
     pipelineStatus: "COMPLETED"
   };
 
   fs.mkdirSync(outputDirectory, { recursive: true });
+
+  const savedJob = saveJob(report, path.join(outputDirectory, "history"));
 
   const reportPath = path.join(
     outputDirectory,
@@ -34,11 +39,11 @@ async function runPipeline(prompt, outputDirectory = "outputs") {
 
   fs.writeFileSync(
     reportPath,
-    JSON.stringify(report, null, 2)
+    JSON.stringify(savedJob, null, 2)
   );
 
   return {
-    report,
+    report: savedJob,
     reportPath
   };
 }

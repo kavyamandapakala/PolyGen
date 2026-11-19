@@ -1,15 +1,15 @@
 {
   "project": "PolyGen",
-  "createdAt": "2026-11-16T03:52:25.294Z",
+  "createdAt": "2026-11-19T16:43:47.103Z",
   "specification": {
     "project": "PolyGen",
-    "sourcePrompt": "A red wooden chair",
+    "sourcePrompt": "Create a red metallic sports car",
     "asset": {
-      "object": "chair",
+      "object": "create sports car",
       "geometry": "unspecified",
       "appearance": {
         "color": "red",
-        "material": "wooden",
+        "material": "metallic",
         "style": "unspecified"
       },
       "size": "unspecified"
@@ -24,5 +24,7 @@
     "message": "Mock generation request accepted.",
     "outputFormat": "glb"
   },
-  "pipelineStatus": "COMPLETED"
+  "status": "QUEUED",
+  "pipelineStatus": "COMPLETED",
+  "jobId": "6f3b33dd-0f2a-4d52-aedf-c7968f1f9549"
 }
