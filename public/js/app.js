@@ -19,7 +19,7 @@ document.querySelectorAll('.example-chip').forEach((button) => {
   });
 });
 
-generateButton.addEventListener('click', () => {
+generateButton.addEventListener('click', async () => {
   const prompt = promptInput.value.trim();
 
   if (!prompt) {
@@ -30,30 +30,45 @@ generateButton.addEventListener('click', () => {
 
   loadingOverlay.classList.add('active');
   generateButton.disabled = true;
-  message.textContent = 'Updating sample preview...';
+  message.textContent = 'Sending prompt to PolyGen backend...';
 
-  // This is a local geometry preview, not AI generation.
-  setTimeout(() => {
-    try {
-      updatePreview(prompt);
+  try {
+    const response = await fetch('http://localhost:3000/api/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ prompt })
+    });
 
-      const shortName = prompt.length > 35
-        ? prompt.slice(0, 35) + '...'
-        : prompt;
+    const data = await response.json();
 
-      modelName.textContent = 'Preview: ' + shortName;
-      modelDescription.textContent =
-        'Sample geometry selected from your prompt. No AI model was generated.';
-
-      message.textContent = 'Sample preview updated · Demo mode';
-    } catch (error) {
-      console.error('Preview error:', error);
-      message.textContent = 'Could not update the preview.';
-    } finally {
-      loadingOverlay.classList.remove('active');
-      generateButton.disabled = false;
+    if (!response.ok) {
+      throw new Error(data.error || 'Generation request failed.');
     }
-  }, 500);
+
+    updatePreview(prompt);
+
+    const specification = data.report.specification;
+    const jobId = data.report.jobId;
+
+    modelName.textContent = `Job: ${specification.asset.object}`;
+
+    modelDescription.textContent =
+      `Color: ${specification.asset.appearance.color} | ` +
+      `Material: ${specification.asset.appearance.material} | ` +
+      `Size: ${specification.asset.size}`;
+
+    message.textContent =
+      `Backend accepted request · Mock mode · Job ID: ${jobId}`;
+
+  } catch (error) {
+    console.error('Generation error:', error);
+    message.textContent = `Error: ${error.message}`;
+  } finally {
+    loadingOverlay.classList.remove('active');
+    generateButton.disabled = false;
+  }
 });
 
 document.getElementById('reset-view').addEventListener('click', resetView);
