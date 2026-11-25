@@ -2,94 +2,155 @@
 
 **Internship Project | Infotact Solutions | Generative AI Domain**
 
-## Project Overview
+## 1. Project Overview
 
-PolyGen is a Generative AI project that aims to convert text descriptions into 3D assets. The project explores prompt processing, generation-provider integration, pipeline execution, and output management.
+PolyGen is a Generative AI application designed to convert natural-language descriptions into structured 3D asset specifications and generate 3D models.
 
-## Project Objective
+The project combines prompt engineering, backend API development, generation-provider integration, job management, and interactive 3D visualization.
 
-The objective is to develop a practical text-to-3D asset generation workflow by studying Generative AI technologies, prompt engineering, AI service integration, and 3D asset generation.
+## 2. Project Objective
 
-## Current Features
+To develop a complete text-to-3D asset generation pipeline that accepts user prompts, processes asset requirements, communicates with an AI generation service, retrieves generated 3D models, and displays them through an interactive 3D viewer.
 
-- Text prompt parsing into a structured 3D asset specification.
-- Extraction of object, colour, material, shape, style, and size information.
+## 3. Implemented Features
+
+- Natural-language prompt input.
+- Prompt parsing into structured 3D asset specifications.
+- Extraction of object, colour, material, geometry, style, and size.
 - Generation-provider interface with a mock implementation.
-- Pipeline execution and JSON report generation.
-- Persistent generation job history.
-- Command-line job history viewer.
+- Backend REST API using Node.js HTTP module.
+- POST `/api/generate` endpoint for generation requests.
+- GET `/api/jobs` endpoint for retrieving job history.
+- JSON generation reports and persistent job history.
+- Interactive Three.js frontend.
+- 3D sample geometry preview with rotation and zoom controls.
+- Frontend-to-backend API communication.
 - Job search and status filtering.
-- Automated tests for implemented modules.
+- Command-line job history viewer.
+- Automated tests using the Node.js test runner.
 
-## Project Architecture
-
-The current prototype follows this workflow:
+## 4. Current Architecture
 
 ```text
-Text Prompt
-    |
-    v
+User Text Prompt
+       |
+       v
+PolyGen Frontend
+(HTML, CSS, JavaScript)
+       |
+       v
+Backend REST API
+(Node.js HTTP Server)
+       |
+       v
 Prompt-to-Spec Parser
-    |
-    v
+       |
+       v
 Structured 3D Specification
-    |
-    v
+       |
+       v
 Generation Provider
-    |
-    v
+(Currently Mock)
+       |
+       v
 Pipeline Execution
-    |
-    v
+       |
+       v
 JSON Report and Job History
+       |
+       v
+Frontend Response and Sample Preview
 ```
 
-The current generation provider is a mock implementation used to test the pipeline. Actual AI-powered 3D asset generation and downloadable 3D output are planned for the next development phase.
-
-## Technology
+## 5. Technology Stack
 
 - JavaScript
 - Node.js
+- HTML5 and CSS3
+- Three.js
+- REST API
 - JSON
+- Node.js built-in HTTP module
 - Node.js built-in test runner
 - Git and GitHub
 
-## Running the Tests
+## 6. Running the Application
+
+### Start the backend
+
+Open Git Bash in the project directory:
+
+```bash
+cd ~/PolyGen
+node src/server.js
+```
+
+Backend address:
+
+http://localhost:3000
+
+### Start the frontend
+
+Open another Git Bash window:
+
+```bash
+cd ~/PolyGen
+python -m http.server 8000
+```
+
+Open the application in a browser:
+
+http://localhost:8000/public/
+
+Both servers must remain running while using the application.
+
+## 7. API Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | /api/generate | Submit a text prompt |
+| GET | /api/jobs | Retrieve saved generation jobs |
+
+Example request:
+
+```json
+{
+  "prompt": "Create a small blue wooden robot"
+}
+```
+
+## 8. Running Automated Tests
+
+Run all project tests:
 
 ```bash
 node --test
 ```
 
-## Project Structure
+Latest recorded test result:
 
-```text
-PolyGen/
-├── docs/
-│   ├── project-understanding.md
-│   └── architecture-and-development-status.md
-├── src/
-│   ├── prompt-to-spec.js
-│   ├── generation-provider.js
-│   ├── run-pipeline.js
-│   ├── job-history.js
-│   ├── job-history-viewer.js
-│   └── job-search.js
-└── tests/
-    ├── prompt-to-spec.test.js
-    ├── generation-provider.test.js
-    ├── run-pipeline.test.js
-    ├── job-history.test.js
-    ├── job-history-viewer.test.js
-    └── job-search.test.js
-```
+- Total tests: 34
+- Passed: 34
+- Failed: 0
 
-## Development Status
+## 9. Current Development Status
 
-The initial prototype includes prompt parsing, mock provider integration, pipeline execution, reporting, and job management.
+The current working prototype includes prompt processing, backend API integration, mock generation-provider integration, JSON reporting, job history, and an interactive Three.js sample viewer.
 
-The next phase will focus on integrating an actual text-to-3D generation service, retrieving generated assets, and evaluating the resulting 3D outputs.
+**Important limitation:** The current provider is a mock implementation. The displayed geometry is sample geometry selected using prompt keywords. Actual AI-generated 3D models and downloadable GLB assets have not yet been implemented.
 
-## Internship Deliverables
+## 10. Planned Development
+
+- Integrate a real text-to-3D AI generation API.
+- Implement asynchronous generation task tracking.
+- Retrieve and download generated GLB models.
+- Display actual generated models using Three.js and GLTFLoader.
+- Improve generation history and model management.
+- Implement error handling and validation.
+- Evaluate generated 3D assets.
+- Complete technical documentation and final demonstration.
+
+## 11. Internship Deliverables
 
 - Source code
 - Technical documentation
