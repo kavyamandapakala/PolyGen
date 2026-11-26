@@ -52,8 +52,7 @@ generateButton.addEventListener('click', async () => {
     const specification = data.report.specification;
     const jobId = data.report.jobId;
 
-    modelName.textContent = `Job: ${specification.asset.object}`;
-
+   modelName.textContent = `AI-Generated ${specification.asset.object}`;
     modelDescription.textContent =
       `Color: ${specification.asset.appearance.color} | ` +
       `Material: ${specification.asset.appearance.material} | ` +
