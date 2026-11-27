@@ -23,9 +23,11 @@ To develop a text-to-3D asset generation pipeline that accepts user prompts, pro
 - Backend REST API using the Node.js HTTP module.
 - POST `/api/generate` endpoint for generation requests.
 - GET `/api/jobs` endpoint for retrieving job history.
+- GET `/api/jobs/:id` endpoint for retrieving an individual job.
 - JSON generation reports and persistent job history.
 - Job search and status filtering.
 - Command-line job history viewer.
+- Job lookup using a Job ID through the frontend.
 
 ### 3D Model Generation and Visualization
 
@@ -39,11 +41,20 @@ To develop a text-to-3D asset generation pipeline that accepts user prompts, pro
 - Reset-view and wireframe controls.
 - Updated the frontend model information display.
 
+### Frontend Job Management
+
+- Job ID input field for retrieving saved jobs.
+- Connected the frontend to the individual job retrieval API.
+- Displays job ID, prompt, object, colour, material, size, creation date, and status.
+- Handles invalid Job IDs with an appropriate error message.
+
 ### Testing
 
 - Automated tests using the Node.js built-in test runner.
 - Prompt validation and generation pipeline tests.
 - Job history and status management tests.
+- Backend API tests for job listing and individual job retrieval.
+- Tests for successful job retrieval and unknown Job IDs.
 
 ## 4. Current Architecture
 
@@ -75,6 +86,12 @@ To develop a text-to-3D asset generation pipeline that accepts user prompts, pro
                         v
                JSON Report and Job
                      History
+                        |
+                        v
+               Job Retrieval API
+                        |
+                        v
+                Frontend Job Details
 
 External AI 3D Generation Tool
              |
@@ -143,15 +160,24 @@ Both servers must remain running while using the application.
 | Method | Endpoint | Purpose |
 |---|---|---|
 | POST | /api/generate | Submit a text prompt |
-| GET | /api/jobs | Retrieve saved generation jobs |
+| GET | /api/jobs | Retrieve all saved generation jobs |
+| GET | /api/jobs/:id | Retrieve an individual job using its ID |
 
-Example request:
+Example generation request:
 
 ```json
 {
   "prompt": "Create a small blue wooden robot"
 }
 ```
+
+Example individual job retrieval:
+
+```text
+GET /api/jobs/{jobId}
+```
+
+The individual job endpoint returns the requested job when it exists and a 404 response when the Job ID is not found.
 
 ## 8. 3D Model Asset
 
@@ -181,14 +207,17 @@ The viewer supports:
 Run all project tests:
 
 ```bash
+cd ~/PolyGen
 node --test
 ```
 
-Latest recorded test result (November 26, 2026):
+Latest recorded test result (November 27, 2026):
 
-- Total tests: 34
-- Passed: 34
+- Total tests: 37
+- Passed: 37
 - Failed: 0
+
+The automated tests cover prompt processing, generation-provider validation, pipeline execution, job history, job searching, and backend API routes.
 
 ## 10. Current Development Status
 
@@ -200,12 +229,14 @@ The current working prototype includes:
 - Mock generation-provider integration.
 - JSON generation reports.
 - Persistent job history.
-- Interactive Three.js frontend.
+- Job search and status filtering.
+- Individual job retrieval by ID.
+- Interactive frontend job lookup.
 - External AI-generated GLB model import.
 - GLTFLoader-based 3D model visualization.
 - Model scaling and centering.
 - Interactive viewer controls.
-- 34 passing automated tests.
+- 37 passing automated tests.
 
 **Current limitation:** The backend generation provider still operates in Mock mode. The 3D robot was generated using an external AI tool and imported into PolyGen separately. Automatic text-to-3D API integration, automated model retrieval, and downloadable generation results are still pending.
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,13 +85,88 @@
         <div>
           <p class="eyebrow">CURRENT OBJECT</p>
           <h3 id="model-name">Imported AI-Generated Robot</h3>
-<p id="model-description">3D model generated using an external AI tool and imported into PolyGen for interactive preview.</p>
+          <p id="model-description">3D model generated using an external AI tool and imported into PolyGen for interactive preview.</p>
         </div>
         <div class="model-format">
           <span>FORMAT</span>
           <strong>3D PREVIEW</strong>
         </div>
       </div>
+
+      <!-- Job lookup section -->
+      <section class="job-panel">
+        <div class="job-panel-heading">
+          <div>
+            <p class="eyebrow">JOB MANAGEMENT</p>
+            <h2>Retrieve Generation Job</h2>
+          </div>
+          <span class="job-tag">JOB HISTORY</span>
+        </div>
+
+        <form id="job-lookup-form">
+          <label for="job-id-input">ENTER JOB ID</label>
+          <div class="job-search-row">
+            <input
+              type="text"
+              id="job-id-input"
+              placeholder="Paste your saved Job ID here"
+              autocomplete="off"
+            >
+            <button type="submit" id="lookup-job-btn">Find Job</button>
+          </div>
+        </form>
+
+        <p id="job-lookup-message" class="job-message">
+          Retrieve details of a previously submitted generation request.
+        </p>
+
+        <div id="job-details" class="job-details" hidden>
+          <div class="job-details-heading">
+            <h3>Generation Job Details</h3>
+            <span id="job-status" class="job-status">QUEUED</span>
+          </div>
+
+          <div class="job-detail-row">
+            <span>Job ID</span>
+            <strong id="detail-job-id"></strong>
+          </div>
+
+          <div class="job-detail-row">
+            <span>Prompt</span>
+            <strong id="detail-prompt"></strong>
+          </div>
+
+          <div class="job-detail-row">
+            <span>Object</span>
+            <strong id="detail-object"></strong>
+          </div>
+
+          <div class="job-detail-row">
+            <span>Color</span>
+            <strong id="detail-color"></strong>
+          </div>
+
+          <div class="job-detail-row">
+            <span>Material</span>
+            <strong id="detail-material"></strong>
+          </div>
+
+          <div class="job-detail-row">
+            <span>Size</span>
+            <strong id="detail-size"></strong>
+          </div>
+
+          <div class="job-detail-row">
+            <span>Pipeline Status</span>
+            <strong id="detail-pipeline-status"></strong>
+          </div>
+
+          <div class="job-detail-row">
+            <span>Created At</span>
+            <strong id="detail-created-at"></strong>
+          </div>
+        </div>
+      </section>
 
       <div class="workspace-footer">
         <span>PolyGen 3D Engine</span>
